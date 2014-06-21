@@ -420,3 +420,7 @@ label[for='toggle-all'] {
   padding-bottom: 18px;
   border-bottom: 1px dotted #CCC;
 }
+
+#ember-testing-container{
+  display: none;
+}

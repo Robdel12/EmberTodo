@@ -1,31 +1,32 @@
 // in order to see the app running inside the QUnit runner
-App.rootElement = '#ember-testing';
+Todos.rootElement = '#ember-testing';
 
 // Common test setup
-App.setupForTesting();
-App.injectTestHelpers();
+Todos.setupForTesting();
+Todos.injectTestHelpers();
 
 // common QUnit module declaration
 module("Integration tests", {
   setup: function() {
     // before each test, ensure the application is ready to run.
-    Ember.run(App, App.advanceReadiness);
+    Ember.run(Todos, Todos.advanceReadiness);
   },
 
   teardown: function() {
     // reset the application state between each test
-    App.reset();
+    Todos.reset();
   }
 });
 
 // QUnit test case
-test("/", function() {
+test("Add a new todo", function() {
   // async helper telling the application to go to the '/' route
   visit("/");
+  fillIn("#new-todo", "New TODO");
+  keyEvent("#new-todo", "keyup", 13);
 
   // helper waiting the application is idle before running the callback
   andThen(function() {
-    equal(find("h2").text(), "Welcome to Ember.js", "Application header is rendered");
-    equal(find("li").length, 3, "There are three items in the list");
+    equal(find("#todo-list li:last").text().trim(), "New TODO");
   });
 });

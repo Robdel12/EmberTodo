@@ -16,7 +16,7 @@
 
         <section id="main" class="main">
           {{#if todosEmpty}}
-            <h3>You don't have any active todos</h3>
+            <h3>You dont have any active todos</h3>
           {{/if}}
           {{outlet}}
           {{input type="checkbox" id="toggle-all" checked=allAreDone}}
@@ -71,6 +71,7 @@
     <script src="js/libs/ember-data.js"></script>
     <script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
     <script src="js/libs/emberfire.js"></script>
+    <script src="js/libs/localstorage_adapter.js"></script>
 
     <script src="js/application.js"></script>
     <script src="js/router.js"></script>
@@ -78,5 +79,8 @@
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
+    <!-- to activate the test runner, add the "?test" query string parameter -->
+    <script src="tests/runner.js"></script>
+    <div id="ember-testing"></div>
   </body>
 </html>
