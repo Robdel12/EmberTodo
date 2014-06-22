@@ -20,13 +20,32 @@ module("Integration tests", {
 
 // QUnit test case
 test("Add a new todo", function() {
-  // async helper telling the application to go to the '/' route
   visit("/");
   fillIn("#new-todo", "New TODO");
   keyEvent("#new-todo", "keyup", 13);
 
-  // helper waiting the application is idle before running the callback
   andThen(function() {
     equal(find("#todo-list li:last").text().trim(), "New TODO");
+  });
+});
+
+test("Edit a todo", function() {
+  visit("/");
+  triggerEvent("#todo-list li:last label", "dblclick");
+  fillIn("#todo-list li:last input", "New TODO EDIT");
+  keyEvent("#todo-list li:last input", "keyup", 13);
+
+  andThen(function() {
+    equal(find("#todo-list li:last").text().trim(), "New TODO EDIT");
+  });
+});
+
+
+test("Remove a todo", function() {
+  visit("/");
+  click("#todo-list li:last .destroy");
+
+  andThen(function() {
+    equal(find("#todo-list li").text().trim(), "");
   });
 });
